@@ -11,21 +11,16 @@ using MySql.Data.MySqlClient;
 
 namespace restaurante
 {
-    public partial class Form1 : Form
+    public partial class FormLogin : Form
     {
         Conexion con;
-        public Form1()
+        public FormLogin()
         {
             InitializeComponent();
             con = new Conexion();
             con.cerrar_conexion();
+            
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            hacerLogin();
-        }
-
         private void hacerLogin()
         {
             if(textBoxUsuario.Text == "" || textBoxPassword.Text == "")
@@ -40,6 +35,9 @@ namespace restaurante
                 MySqlDataReader dr = con.buscarRegistro(sql).ExecuteReader();
                 if (dr.HasRows)
                 {
+                    PrincipalForm principal = new PrincipalForm();
+                    principal.Show();
+                    //this.Hide();
                     MessageBox.Show("Credenciales correctas");
                 }
                 else
@@ -47,6 +45,21 @@ namespace restaurante
                     MessageBox.Show("Contrase o usuario incorrectas");
                 }
             }
+        }
+
+        private void textBoxUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            hacerLogin();
         }
     }
 }
